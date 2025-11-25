@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Архив статей</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .archive {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .one-post {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .post-title {
+            color: #333;
+            margin: 0 0 10px 0;
+            border-bottom: 2px solid #1abc9c;
+            padding-bottom: 10px;
+        }
+        .article-info {
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .article-author {
+            font-weight: bold;
+        }
+        .article-created-date {
+            color: #888;
+        }
+        .article-text {
+            color: #444;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .header img {
+            max-width: 200px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Архив статей</h1>
+        <!-- Временная заглушка вместо изображения -->
+        <div style="background: #1abc9c; color: white; padding: 10px; margin: 10px 0;">
+            [Логотип проекта]
+        </div>
+        <!-- Если будете добавлять изображение: -->
+        <!-- <img src="{{ STATIC_URL }}img/logo.png" alt="Логотип" /> -->
+    </div>
+    
+    <div class="archive">
+        {% for post in posts %}
+        <div class="one-post">
+            <h2 class="post-title">{{ post.title }}</h2>
+            <div class="article-info">
+                <div class="article-author">{{ post.author.username }}</div>
+                <div class="article-created-date">{{ post.created_date }}</div>
+            </div>
+            <p class="article-text">{{ post.get_excerpt }}</p>
+        </div>
+        {% empty %}
+        <div class="one-post">
+            <h2 class="post-title">Статей пока нет</h2>
+            <p class="article-text">Добавьте статьи через административную панель.</p>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
